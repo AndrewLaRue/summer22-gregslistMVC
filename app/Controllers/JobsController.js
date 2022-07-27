@@ -1,12 +1,16 @@
+import { ProxyState } from "../AppState.js"
+
 
 
 
 
 
 function _drawJobs() {
-
+  let template = ''
+  let jobs = ProxyState.jobs
+  jobs.forEach(j => template += j.Template)
   // @ts-ignore
-  document.getElementById('listings').innerHTML = '<p> Jobs page </p>'
+  document.getElementById('listings').innerHTML = template
 }
 
 

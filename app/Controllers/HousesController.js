@@ -1,7 +1,12 @@
+import { ProxyState } from "../AppState.js"
+import { housesService } from "../Services/HousesService.js"
 
 function _drawHouses(){
-  // GET THE HOUES TEMPLATE
-  document.getElementById('listings').innerHTML = '<p> houses go here </p>'
+    let template = ''
+    let houses = ProxyState.houses
+    houses.forEach(h => template += h.Template)
+    // @ts-ignore
+    document.getElementById('listings').innerHTML = template
 }
 
 
@@ -12,6 +17,5 @@ export class HousesController{
 
   viewHouses(){
     _drawHouses()
-    // swap out car form with house form
   }
 }
