@@ -24,7 +24,7 @@ export class Car{
   get Template(){
     return `
     <div class="col-4 p-3">
-      <div class="bg-white elevation-2">
+      <div class="bg-white elevation-2 g-card">
         <img class="img-fluid" src="${this.img}" alt="">
         <div class="p-2">
           <h4 class="text-center">${this.make} | ${this.model} | ${this.year}</h4>
@@ -36,4 +36,5 @@ export class Car{
     </div>
     `
   }
+  
 }

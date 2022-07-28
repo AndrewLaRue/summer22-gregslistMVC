@@ -8,11 +8,15 @@ class AppState extends EventEmitter {
   /** @type {import('./Models/Value').Value[]} */
   values = []
 
+
+  
   /** @type {import('./Models/Car').Car[]} */
   cars = [
     new Car({make:'Honda', model:'CRV3-XL PLUS', year:2023, price:100000, img:'https://static01.nyt.com/images/2020/05/22/business/21wheels3-print/merlin_9261190_cdd1e166-951d-4bd4-b4be-26f41a5dcd96-articleLarge.jpg?quality=75&auto=webp&disable=upscale', description: 'driven only once, car of the future'}),
     new Car({make:'Tesla', model:'Cyber truck', year:3000, price:5, img:'https://ogden_images.s3.amazonaws.com/www.motherearthnews.com/images/1975/09/22153103/al-yandacropped.jpg', description:'state of the art, nothing like it, this is also technically just a pre-order, you\'ll get it in the year 3056.'})
   ]
+
+
 
   /** @type {import('./Models/House').House[]} */
   houses = [
@@ -34,21 +38,24 @@ class AppState extends EventEmitter {
     })
   ]
 
+
+
   /** @type {import('./Models/Job').Job[]} */
   jobs = [
     new Job({
       position: 'trainer',
       pay: 15,
       description: 'Cursus eget nunc scelerisque viverra mauris in aliquam sem. Placerat duis ultricies lacus sed turpis tincidunt. Amet nisl purus in mollis nunc sed id. Faucibus in ornare quam viverra. Consectetur lorem donec massa sapien faucibus et molestie.',
-      img: 'https://thiscatdoesnotexist.com/'
+      img: 'https://golawenforcement.com/wp-content/uploads/2018/08/webdeveloperjobs.jpg'
     }),
     new Job({
       position: 'walker',
       pay: 5,
       description: 'Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Pharetra vel turpis nunc eget lorem dolor sed viverra. Est placerat in egestas erat imperdiet sed euismod nisi porta. Morbi tincidunt augue interdum velit. Pretium lectus quam id leo in vitae turpis massa.',
-      img: 'https://thiscatdoesnotexist.com/'
+      img: 'https://cdn.searchenginejournal.com/wp-content/uploads/2017/06/shutterstock_268688447.jpg'
     })
   ]
+
 }
 
 export const ProxyState = new Proxy(new AppState(), {
