@@ -42,7 +42,7 @@ function _drawHouses(){
               <textarea class="w-100 form-control" name="description" id="description" rows="5"></textarea>
             </div>
             <div class="col-12">
-            <button type="submit" class="btn btn-primary w-100 p-2 mt-3 text-light">Submit</button>
+            <button type="submit" class="btn btn-primary w-100 p-2 mt-3 text-light" data-bs-dismiss="modal">Submit</button>
             </div>
           </div>
         </form>

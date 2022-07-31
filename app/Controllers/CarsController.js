@@ -36,7 +36,7 @@ function _drawCars(){
             <input class="form-control" type="text" id="img" name="img">
             <label class="form-label" for="description">Description</label>
             <textarea class="w-100 form-control" name="description" id="description" rows="5"></textarea>
-            <button type="submit" class="btn btn-primary w-100 p-2 mt-3 text-light">Submit</button>
+            <button type="submit" class="btn btn-primary w-100 p-2 mt-3 text-light" data-bs-dismiss="modal">Submit</button>
           </div>
         </form>
   `
