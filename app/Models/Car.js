@@ -1,15 +1,15 @@
-import { generateId } from '../Utils/generateId.js'
+// import { generateId } from '../Utils/generateId.js'
 
 
 export class Car{
-  constructor({make, model, year, price, img, description}){
-    this.id = generateId()
-    this.make = make,
-    this.model = model,
-    this.year = year, 
-    this.price = price,
-    this.img = img,
-    this.description = description
+  constructor({id, make, model, year, price, imgUrl, description}){
+    this.id = id
+    this.make = make || ''
+    this.model = model || ''
+    this.year = year || ''
+    this.price = price || ''
+    this.img = imgUrl || ''
+    this.description = description || ''
   }
 
   // constructor(data){
@@ -30,6 +30,7 @@ export class Car{
           <h4 class="text-center">${this.make} | ${this.model} | ${this.year}</h4>
           <p>${this.description}</p>
           <p class="text-end text-success m-0">$<b>${this.price}</b></p>
+          <button class="btn btn-info" onclick="app.carsController.adjustCar('${this.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">Adjust Car Settings</button>
           <button class="btn btn-danger" onclick="app.carsController.deleteCar('${this.id}')">delete me</button> 
         </div>
       </div>

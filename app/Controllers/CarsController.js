@@ -1,6 +1,8 @@
 import { ProxyState } from "../AppState.js";
+import { getCarForm } from "../Components/CarForm.js";
 import { carsService } from "../Services/CarsService.js";
-import { loadState, saveState } from "../Utils/LocalStorage.js";
+// import { loadState, saveState } from "../Utils/LocalStorage.js";
+import { Pop } from "../Utils/Pop.js";
 
 
 
@@ -14,78 +16,109 @@ function _drawCars(){
   // @ts-ignore
   document.getElementById('listings').innerHTML = template
   // @ts-ignore
-  document.getElementById('form').innerHTML = `
-          <form class="col-12 bg-white p-3 elevation-2 rounded" onsubmit="app.carsController.createCar()">
-          <h3 class="text-primary">List Your Car</h3>
-          <div class="row">
-            <div class="col-4">
-              <label class="form-label" for="make">Make</label>
-              <input class="form-control" type="text" minlength="5" id="make" name="make">
-            </div>
-            <div class="col-4">
-              <label class="form-label" for="model">Model</label>
-              <input class="form-control" type="text" id="model" name="model">
-            </div>
-            <div class="col-4">
-              <label class="form-label" for="year">Year</label>
-              <input class="form-control" type="number" id="year" name="year">
-            </div>
-            <label class="form-label" for="price">Price</label>
-            <input class="form-control" type="number" min="1" id="price" name="price">
-            <label class="form-label" for="img">Image</label>
-            <input class="form-control" type="text" id="img" name="img">
-            <label class="form-label" for="description">Description</label>
-            <textarea class="w-100 form-control" name="description" id="description" rows="5"></textarea>
-            <button type="submit" class="btn btn-primary w-100 p-2 mt-3 text-light" data-bs-dismiss="modal">Submit</button>
-          </div>
-        </form>
-  `
+  document.getElementById('form').innerHTML = getCarForm()
 }
-
-function test(){
-  console.log('listener triggered');
-}
-
 
 export class CarsController{
   constructor(){
-    console.log('cars controller loaded');
-    // NOTE register a listener. below is listens to 'cars' on the proxystate, and when triggerd runs '_drawCars'
-    // debugger
     ProxyState.on('cars', _drawCars)
-    ProxyState.on('cars', saveState)
-    ProxyState.on('cars', test)
     this.viewCars()
   }
 
   viewCars(){
     _drawCars()
-    loadState()
+    this.getCars()
   }
 
-  createCar(){
-    console.log('car form submitted');
-    // NOTE window.event.preventDefault grabs the submit event from the form submit and keeps the page from refreshing
+  async getCars() {
+  try {
+    await carsService.getCars()
+  } catch (error) {
+    console.error('[Get Cars]', error);
+    Pop.error(error)
+  }
+}
+
+  async createCar(){
+    try {
+          // @ts-ignore
     window.event.preventDefault()
+    // @ts-ignore
     let form = window.event.target
     console.log(form);
 
-   let newCar ={
-    make: form.make.value,
-    model: form.model.value,
-    year: form.year.value,
-    price: form.price.value,
-    img: form.img.value,
-    description: form.description.value,
-   }
-    carsService.createCar(newCar)
+      let newCar = {
+        // @ts-ignore
+        make: form.make.value,
+        // @ts-ignore
+        model: form.model.value,
+        // @ts-ignore
+        year: form.year.value,
+        // @ts-ignore
+        price: form.price.value,
+        // @ts-ignore
+        imgUrl: form.img.value,
+        // @ts-ignore
+        description: form.description.value,
+      }
+         await carsService.createCar(newCar)
+    // @ts-ignore
     form.reset()
-    // NOTE replaced by listeners in constructor
-    // _drawCars()
+
+    } catch (error) {
+      console.error("[Create Car]", error);
+      Pop.error(error)
+    }
+
+   }
+
+ async deleteCar(id){
+  try {
+    await carsService.deleteCar(id)
+    
+  } catch (error) {
+    console.error('[Delete Car]', error);
+    Pop.error(error)
+  }
   }
 
-  deleteCar(id){
-    console.log('deleteing', id);
-    carsService.deleteCar(id)
+
+  // THIS IS NOT THE ASYNC ONE
+  adjustCar(carId) {
+    let car = ProxyState.cars.find(c => c.id == carId)
+    // @ts-ignore
+    document.getElementById('form').innerHTML = getCarForm(car)
   }
+
+
+  async editCar(carId) {
+    try {
+      // @ts-ignore
+      window.event.preventDefault()
+      // @ts-ignore
+      let form = window.event.target
+      let carData = {
+        id: carId,
+        // @ts-ignore
+        make: form.make.value,
+        // @ts-ignore
+        model: form.model.value,
+        // @ts-ignore
+        year: form.year.value,
+        // @ts-ignore
+        price: form.price.value,
+        // @ts-ignore
+        imgUrl: form.img.value,
+        // @ts-ignore
+        description: form.description.value
+      }
+      await carsService.editCar(carData)
+    } catch (error) {
+      console.error('[Edit Car]', error)
+      Pop.error(error)
+    }
+  }
+
+
+
 }

@@ -1,18 +1,17 @@
-import { generateId } from "../Utils/generateId.js"
+// import { generateId } from "../Utils/generateId.js"
 
 
 
 export class House{
-
-
-  constructor(data) {
-    this.id = generateId()
-    this.address = data.address,
-    this.bedrooms = data.bedrooms,
-    this.bathrooms = data.bathrooms,
-    this.description = data.description,
-    this.price = data.price,
-    this.img = data.img
+  constructor({id, levels, bedrooms, bathrooms, description, price, imgUrl, year}) {
+    this.id = id
+    this.levels = levels || ''
+    this.bedrooms = bedrooms || ''
+    this.bathrooms = bathrooms || ''
+    this.description = description || ''
+    this.price = price || ''
+    this.img = imgUrl || ''
+    this.year = year || ''
   }
     
     
@@ -20,7 +19,7 @@ get Template(){
       return `
           <div class="col-4 p-3">
               <div class="bg-white elevation-2 g-card">
-                <p>${this.address}</p>
+                <p>${this.levels}</p>
                 <img class="img-fluid" src="${this.img}" alt="">
                 <div class="p-2">
                     <h4 class="text-center">Beds: ${this.bedrooms} | Baths: ${this.bathrooms}</h4>
