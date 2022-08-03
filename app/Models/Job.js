@@ -21,7 +21,8 @@ export class Job {
                 <div class="p-2">
                     <h4 class="text-center">${this.jobTitle} </h4>
                     <h4 class="text-center">${this.hours} </h4>
-                    <h4 class="text-center">${this.rate} </h4>
+                    <h4 class="text-center">
+                    ${this.rate} </h4>
                     <p>${this.description}</p>
                     <button class="btn btn-danger" onclick="app.jobsController.deleteJob('${this.id}')">delete me</button> 
                 </div>
