@@ -24,6 +24,7 @@ export class Job {
                     <h4 class="text-center">
                     ${this.rate} </h4>
                     <p>${this.description}</p>
+                    <button class="btn btn-info" onclick="app.jobsController.adjustJob('${this.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">Adjust Job Settings</button>
                     <button class="btn btn-danger" onclick="app.jobsController.deleteJob('${this.id}')">delete me</button> 
                 </div>
             </div>

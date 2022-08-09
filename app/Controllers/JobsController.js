@@ -33,6 +33,37 @@ export class JobsController{
 
   }
 
+    adjustJob(jobId) {
+    let job = ProxyState.jobs.find(j => j.id == jobId)
+    // @ts-ignore
+    document.getElementById('form').innerHTML = getJobForm(job)
+  }
+
+    async editJob(jobId) {
+    try {
+      // @ts-ignore
+      window.event.preventDefault()
+      // @ts-ignore
+      let form = window.event.target
+      let jobData = {
+        id: jobId,
+        // @ts-ignore
+        company: form.company.value,
+        // @ts-ignore
+        jobTitle: form.jobTitle.value,
+        // @ts-ignore
+        hours: form.hours.value,
+        // @ts-ignore
+        rate: form.rate.value,
+        // @ts-ignore
+        description: form.description.value
+      }
+      await jobsService.editJob(jobData)
+    } catch (error) {
+      console.error('[Edit Job]', error)
+      Pop.error(error)
+    }
+  }
 
   viewJobs(){
     _drawJobs()
@@ -82,7 +113,7 @@ export class JobsController{
       await jobsService.deleteJob(id)
       
     } catch (error) {
-      console.error('[Delete Car]', error);
+      console.error('[Delete Job]', error);
       Pop.error(error)
     }
   }

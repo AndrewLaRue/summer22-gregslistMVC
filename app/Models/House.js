@@ -25,6 +25,7 @@ get Template(){
                     <h4 class="text-center">Beds: ${this.bedrooms} | Baths: ${this.bathrooms}</h4>
                     <p>${this.description}</p>
                     <p class="text-end text-success m-0">$<b>${this.price}</b></p>
+                    <button class="btn btn-info" onclick="app.housesController.adjustHouse('${this.id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">Adjust House Settings</button>
                     <button class="btn btn-danger" onclick="app.housesController.deleteHouse('${this.id}')">delete me</button> 
                 </div>
               </div>

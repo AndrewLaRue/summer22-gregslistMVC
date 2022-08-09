@@ -80,6 +80,12 @@ export class HousesController{
     // _drawHouses()
   }
 
+    adjustHouse(houseId) {
+    let house = ProxyState.houses.find(h => h.id == houseId)
+    // @ts-ignore
+    document.getElementById('form').innerHTML = getHouseForm(house)
+  }
+
   async deleteHouse(id) {
     try {
       
@@ -88,6 +94,36 @@ export class HousesController{
       console.error('[Delete House]', error);
       Pop.error(error)
     }
-}
+  }
+  
+  async editHouse(houseId) {
+    try {
+      // @ts-ignore
+      window.event.preventDefault()
+      // @ts-ignore
+      let form = window.event.target
+      let houseData = {
+        id: houseId,
+        // @ts-ignore
+        levels: form.levels.value,
+        // @ts-ignore
+        bedrooms: form.bedrooms.value,
+        // @ts-ignore
+        bathrooms: form.bathrooms.value,
+        // @ts-ignore
+        description: form.description.value,
+        // @ts-ignore
+        imgUrl: form.img.value,
+        // @ts-ignore
+        price: form.price.value,
+        // @ts-ignore
+        year: form.year.value
+      }
+      await housesService.editHouse(houseData)
+    } catch (error) {
+      console.error('[Edit House]', error)
+      Pop.error(error)
+    }
+  }
 
 }
